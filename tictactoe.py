@@ -25,7 +25,7 @@ def get_move(possible_moves):
     flag = True
 
     while flag:
-        move = input("Enter coordinates (e.g. A1): ")
+        move = input("Enter coordinates (e.g. A1): ").upper()
         if move in possible_moves:
             return move
         else: 
@@ -77,32 +77,31 @@ def tictactoe_game():
     possible_moves = ['A1', 'A2', 'A3', 'B1', 'B2', 'B3', 'C1', 'C2', 'C3']
     used_moves_x = []
     used_moves_o = []
-    
     flag = True
 
     while flag:
         os.system("cls || clear")
         print_table(mark(used_moves_o, used_moves_x))
-        if possible_moves == []:
-            print("Remis")
-            flag = False
+           
+        if has_won(used_moves_o,used_moves_x):
+            break
         else:
-            if has_won(used_moves_o,used_moves_x):
-                flag = False
-            else:
-                print('Player O')
-                move = get_move(possible_moves)
-                possible_moves.remove(move)
-                used_moves_o.append(move)
-                os.system("cls || clear")
-            if has_won(used_moves_o,used_moves_x):
-                flag = False
-            else:
-                print_table(mark(used_moves_o, used_moves_x))
-                print('Player X')
-                move = get_move(possible_moves)
-                possible_moves.remove(move)
-                used_moves_x.append(move)
+            print('Player O')
+            move = get_move(possible_moves)
+            possible_moves.remove(move)
+            used_moves_o.append(move)
+            os.system("cls || clear")
+        if has_won(used_moves_o,used_moves_x):
+            break
+        if possible_moves == []:
+            print("It's a tie!")
+            break
+        else:
+            print_table(mark(used_moves_o, used_moves_x))
+            print('Player X')
+            move = get_move(possible_moves)
+            possible_moves.remove(move)
+            used_moves_x.append(move)
                 
                 
    
