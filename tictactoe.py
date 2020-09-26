@@ -102,13 +102,11 @@ def tictactoe_game():
             move = get_move(possible_moves)
             possible_moves.remove(move)
             used_moves_x.append(move)
-                
-                
-   
+            # koniec
+
+def playAgain():
+
+
+        
 tictactoe_game()
-    
-
-
-
-
 
