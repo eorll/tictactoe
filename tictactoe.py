@@ -8,8 +8,6 @@ import os
 # ????
 
 
-
-
 def table():
     table = {'A1': ' ' , 'A2': ' ' , 'A3': ' ' ,
             'B1': ' ' , 'B2': ' ' , 'B3': ' ' ,
@@ -31,8 +29,6 @@ def get_move(possible_moves):
         else: 
             print("Enter valid coordinates!")
 
-    
-
 
 def mark(used_moves_o, used_moves_x):
     # oznacza x i o na tablicy
@@ -53,10 +49,12 @@ def has_won(used_moves_o, used_moves_x):
         result_x = all(elem in used_moves_x for elem in i)
         if result_o:
             print("Player O won!")
+            play_again()
             smb_won = True
             return smb_won
         elif result_x:
             print("Player X won!")
+            play_again()
             smb_won = True
             return smb_won
 
@@ -95,6 +93,7 @@ def tictactoe_game():
             break
         if possible_moves == []:
             print("It's a tie!")
+            play_again()
             break
         else:
             print_table(mark(used_moves_o, used_moves_x))
@@ -102,7 +101,19 @@ def tictactoe_game():
             move = get_move(possible_moves)
             possible_moves.remove(move)
             used_moves_x.append(move)
-                
+
+def menu():
+    print("Welcome to Tic Tac Toe game!")
+
+
+def play_again():
+    user_input=input("Play again? Y/N: ").upper()
+    if user_input == "Y":
+        return tictactoe_game()
+    else:
+        print("Bye!")
+
+
                 
    
 tictactoe_game()
