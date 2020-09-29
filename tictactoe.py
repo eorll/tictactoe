@@ -62,6 +62,7 @@ def has_won(used_moves):
 
 
 def o_or_x(used_moves):
+    # rozdziela wykonane ruchy pomiędzy o i x
     used_moves_o = []
     used_moves_x = []
     for i in used_moves:
@@ -118,6 +119,7 @@ def player_move(possible_moves,used_moves):
     
    
 def AI_easy(possible_moves,used_moves):
+    # wykonuje losowo ruch
     os.system("cls || clear")
     print_table(mark(used_moves))
     move = random.choice(possible_moves)
@@ -125,6 +127,7 @@ def AI_easy(possible_moves,used_moves):
 
 
 def AI_medium(possible_moves, used_moves):
+    #sprawdza czy są zajęte 2 pola, jeśli tak zajmuje 3, jeśli nie - wykonuje losowy ruch
     win_moves = [['A1','A2','A3'], ['B1','B2','B3'], ['C1','C2','C3'], ['A1','B1','C1'], ['A2','B2','C2'], ['A3','B3','C3'], ['A1','B2','C3'],['A3','B2','C1']]
     os.system("cls || clear")
     print_table(mark(used_moves))
@@ -172,11 +175,12 @@ def play_again():
     else:
         print("Bye!")
 
-
-                
-   
-tictactoe_game(menu())
+ 
+def main():
+    tictactoe_game(menu())
     
+
+main()
 
 
 
