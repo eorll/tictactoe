@@ -1,9 +1,9 @@
 import os, random
 
 # Zrobiono:
-# proste menu
-# proste AI
-# trochę skrócono kod 
+# easy AI
+# medium AI
+# poprawiono kod 
 
 def table():
     table = {'A1': ' ' , 'A2': ' ' , 'A3': ' ' ,
@@ -82,9 +82,6 @@ def print_table(table):
     print('  ---+---+---')
     print('C  ' + table['C1'] + ' |' + ' ' + table['C2'] + ' |' + ' ' + table['C3'])
     
-def game_shortcut(possible_moves, used_moves):
-    move = get_move(possible_moves)
-    return possible_moves.remove(move), used_moves.append(move)
 
 
 def tictactoe_game(game_mode):
@@ -94,43 +91,74 @@ def tictactoe_game(game_mode):
 
     while flag:
         os.system("cls || clear")
-        print_table(mark(used_moves))
-           
+        
         if has_won(used_moves):
             break
         else:
-            print('Player O')
-            game_shortcut(possible_moves, used_moves)
             os.system("cls || clear")
-        if has_won(used_moves):
-            break
+            print('Player 1')
+            player_move(possible_moves,used_moves)
         if possible_moves == []:
             print("It's a tie!")
             play_again()
             break
-        if game_mode == "vsAI":
-            player_vs_AI(possible_moves,used_moves)
+        if game_mode == "AI_easy":
+            AI_easy(possible_moves,used_moves)
+        if game_mode == 'AI_medium':
+            AI_medium(possible_moves,used_moves)
         else:
-            print_table(mark(used_moves))
-            print('Player X')
-            game_shortcut(possible_moves, used_moves)
+            os.system("cls || clear")
+            print('Player 2')
+            player_move(possible_moves, used_moves)    
 
-
-def player_vs_AI(possible_moves,used_moves):
+def player_move(possible_moves,used_moves):
+    print_table(mark(used_moves))
+    move = get_move(possible_moves)
+    return possible_moves.remove(move), used_moves.append(move)
+    
+   
+def AI_easy(possible_moves,used_moves):
+    os.system("cls || clear")
     print_table(mark(used_moves))
     move = random.choice(possible_moves)
     return possible_moves.remove(move), used_moves.append(move)
 
 
+def AI_medium(possible_moves, used_moves):
+    win_moves = [['A1','A2','A3'], ['B1','B2','B3'], ['C1','C2','C3'], ['A1','B1','C1'], ['A2','B2','C2'], ['A3','B3','C3'], ['A1','B2','C3'],['A3','B2','C1']]
+    os.system("cls || clear")
+    print_table(mark(used_moves))
+    for i in win_moves:
+        for j in used_moves:
+            if j in i:
+                i.remove(j)
+    for i in win_moves:
+        if len(i) == 1:
+            return possible_moves.remove(i[0]), used_moves.append(i[0])
+    move = random.choice(possible_moves)
+    return possible_moves.remove(move), used_moves.append(move)
+    
+
 def menu():
+    os.system("cls || clear")
     print("Welcome to Tic Tac Toe game!")
     print("1 - Player vs Player \n2 - Player vs AI")
     flag = True
     while flag:
         user_input = input('Choose game mode:')
         if user_input == '2':
-            game_mode = "vsAI"
-            return game_mode
+            flag_2 = True
+            while flag_2:
+                os.system("cls || clear")
+                user_input_2 = input("Choose difficulty level:\n1 - Easy\n2 - Medium\n")
+                if user_input_2 == '1':
+                    game_mode = 'AI_easy'
+                    return game_mode 
+                if user_input_2 == '2':
+                    game_mode = 'AI_medium'
+                    return game_mode 
+                else:
+                    print("Enter valid number!")
         if user_input == '1':
             return game_mode
         else:
