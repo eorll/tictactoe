@@ -99,6 +99,8 @@ def tictactoe_game(game_mode):
             os.system("cls || clear")
             print('Player 1')
             player_move(possible_moves,used_moves)
+        if has_won(used_moves):
+            break
         if possible_moves == []:
             print("It's a tie!")
             play_again()
@@ -163,6 +165,7 @@ def menu():
                 else:
                     print("Enter valid number!")
         if user_input == '1':
+            game_mode = None
             return game_mode
         else:
             print("Enter valid number!")
