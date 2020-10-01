@@ -1,4 +1,4 @@
-import os, random
+import os, random, time
 
 # Zrobiono:
 # easy AI
@@ -40,6 +40,8 @@ def mark(used_moves):
 
 
 def has_won(used_moves):
+    os.system("cls || clear")
+    print_table(mark(used_moves))
     win_moves = [['A1','A2','A3'], ['B1','B2','B3'], ['C1','C2','C3'], ['A1','B1','C1'], ['A2','B2','C2'], ['A3','B3','C3'], ['A1','B2','C3'],['A3','B2','C1']]
     smb_won = False
     used_moves_x = o_or_x(used_moves)[1]
@@ -109,7 +111,7 @@ def tictactoe_game(game_mode):
             AI_easy(possible_moves,used_moves)
         if game_mode == 'AI_medium':
             AI_medium(possible_moves,used_moves)
-        else:
+        if game_mode == 'pvp':
             os.system("cls || clear")
             print('Player 2')
             player_move(possible_moves, used_moves)    
@@ -124,6 +126,7 @@ def AI_easy(possible_moves,used_moves):
     # wykonuje losowo ruch
     os.system("cls || clear")
     print_table(mark(used_moves))
+    time.sleep(0.5)
     move = random.choice(possible_moves)
     return possible_moves.remove(move), used_moves.append(move)
 
@@ -133,6 +136,7 @@ def AI_medium(possible_moves, used_moves):
     win_moves = [['A1','A2','A3'], ['B1','B2','B3'], ['C1','C2','C3'], ['A1','B1','C1'], ['A2','B2','C2'], ['A3','B3','C3'], ['A1','B2','C3'],['A3','B2','C1']]
     os.system("cls || clear")
     print_table(mark(used_moves))
+    time.sleep(0.5)
     for i in win_moves:
         for j in used_moves:
             if j in i:
@@ -165,7 +169,7 @@ def menu():
                 else:
                     print("Enter valid number!")
         if user_input == '1':
-            game_mode = None
+            game_mode = 'pvp'
             return game_mode
         else:
             print("Enter valid number!")
